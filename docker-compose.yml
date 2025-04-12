@@ -1,84 +1,74 @@
-services:
-  db:
-    image: postgres:13
-    restart: always
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - app-network
 
-  redis:
-    image: redis:alpine
-    restart: always
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend.Dockerfile
+    volumes:
+      - ./frontend/build:/usr/share/nginx/html
     networks:
       - app-network
+    restart: always
+    depends_on:
+      - backend
 
   backend:
     build:
       context: .
       dockerfile: docker/backend.Dockerfile
+    env_file:
+      - .env
+    networks:
+      - app-network
     restart: always
     depends_on:
       - db
       - redis
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - REDIS_URL=${REDIS_URL}
-      - SECRET_KEY=${SECRET_KEY}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - OTRANSLATOR_API_KEY=${OTRANSLATOR_API_KEY}
-      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
-      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
-      - PAYPAL_MODE=${PAYPAL_MODE}
+
+  db:
+    image: postgres:13
     volumes:
-      - ./files:/app/files
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - .env
     networks:
       - app-network
+    restart: always
+
+  redis:
+    image: redis:alpine
+    networks:
+      - app-network
+    restart: always
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./frontend/build:/usr/share/nginx/html
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - app-network
+    restart: always
 
   celery:
     build:
       context: .
       dockerfile: docker/backend.Dockerfile
     command: celery -A tasks worker --loglevel=info
-    restart: always
     depends_on:
       - backend
       - redis
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - REDIS_URL=${REDIS_URL}
-      - OTRANSLATOR_API_KEY=${OTRANSLATOR_API_KEY}
-    volumes:
-      - ./files:/app/files
     networks:
       - app-network
-
-  frontend:
-    build:
-      context: .
-      dockerfile: docker/frontend.Dockerfile
+    env_file:
+      - .env
     restart: always
-    networks:
-      - app-network
-
-  nginx:
-    image: nginx:alpine
-    restart: always
-    depends_on:
-      - backend
-      - frontend
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/ssl:/etc/nginx/ssl
-    networks:
-      - app-network
 
 networks:
   app-network:
@@ -86,4 +76,3 @@ networks:
 
 volumes:
   postgres_data:
-  
