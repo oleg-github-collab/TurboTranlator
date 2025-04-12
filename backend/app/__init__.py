@@ -3,6 +3,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Ініціалізація розширень
 db = SQLAlchemy()
