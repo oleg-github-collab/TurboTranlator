@@ -1,17 +1,18 @@
-# Етап збірки
-FROM node:18-alpine as build
+# Етап 1: збірка фронтенду
+FROM node:18-alpine as build-stage
 
 WORKDIR /app
-
-# Копіюємо package.json та встановлюємо залежності
-COPY frontend/package.json ./
+COPY ./frontend/package*.json ./
 RUN npm install
-
-# Копіюємо код фронтенду
-COPY frontend/ ./
-
-# Виконуємо збірку
+COPY ./frontend ./
 RUN npm run build
 
-# Етап production не потрібен, оскільки використовуємо окремий Nginx
-# Просто результат збірки
+# Етап 2: NGINX з готовим білдом
+FROM nginx:alpine
+
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# Або, якщо це Create React App:
+# COPY --from=build-stage /app/build /usr/share/nginx/html
+
+COPY ./nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf

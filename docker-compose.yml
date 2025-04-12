@@ -1,11 +1,10 @@
 
+
 services:
   frontend:
     build:
       context: .
       dockerfile: docker/frontend.Dockerfile
-    volumes:
-      - ./frontend/build:/usr/share/nginx/html
     networks:
       - app-network
     restart: always
@@ -37,21 +36,6 @@ services:
 
   redis:
     image: redis:alpine
-    networks:
-      - app-network
-    restart: always
-
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./frontend/build:/usr/share/nginx/html
-    depends_on:
-      - frontend
-      - backend
     networks:
       - app-network
     restart: always
