@@ -7,6 +7,7 @@ mkdir -p backend/files/uploads
 mkdir -p backend/files/translations
 mkdir -p nginx/ssl
 
+
 # Встановлення прав на виконання
 chmod +x backend/migrations/migrate.sh
 
