@@ -1,13 +1,24 @@
-Flask==2.2.3
-Flask-SQLAlchemy==3.0.3
-Flask-Migrate==4.0.4
+# 🔧 Базові залежності
+Flask==2.2.5
+Werkzeug==2.2.3
+python-dotenv==1.0.1
 Flask-Cors==3.0.10
-psycopg2-binary==2.9.5
-python-dotenv==1.0.0
-paypalrestsdk==1.13.1
-celery==5.2.7
-redis==4.5.1
-requests==2.28.2
-gunicorn==20.1.0
-pydantic==1.10.7
-pypdf2==3.0.1
+Flask-Migrate==4.0.5
+Flask-SQLAlchemy==3.1.1
+
+# 🗄️ База даних
+psycopg2-binary==2.9.9
+
+# 🔐 Аутентифікація
+Flask-JWT-Extended==4.6.0
+passlib==1.7.4
+bcrypt==4.1.2
+
+# 💸 Платежі
+requests==2.31.0
+
+# 💬 Redis (якщо ти його використовуєш для черг/кешу)
+redis==5.0.1
+
+# ✅ Опціональні (для email тощо)
+Flask-Mail==0.9.1
