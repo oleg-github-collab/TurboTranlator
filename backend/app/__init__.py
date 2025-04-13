@@ -26,7 +26,7 @@ def create_app():
     CORS(app)
 
     # 📦 Імпортуємо моделі (щоб Flask-Migrate бачив їх)
-    from app.models import user
+    from backend.app.api import user
 
     # 🧩 Реєстрація blueprint'ів
     from app.api.auth import auth_bp
