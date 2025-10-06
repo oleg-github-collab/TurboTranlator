@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080';
 // Request queue for deduplication
 const pendingRequests = new Map<string, Promise<any>>();
 
-// Rate limiting
+// Rate limiting with token bucket algorithm
 interface RateLimitBucket {
   tokens: number;
   lastRefill: number;
@@ -22,7 +22,7 @@ function checkRateLimit(endpoint: string, maxRequests: number = 10, windowMs: nu
     rateLimitBuckets.set(endpoint, bucket);
   }
 
-  // Refill tokens
+  // Refill tokens based on time passed
   const timePassed = now - bucket.lastRefill;
   const tokensToAdd = Math.floor((timePassed / windowMs) * maxRequests);
   if (tokensToAdd > 0) {
@@ -30,7 +30,7 @@ function checkRateLimit(endpoint: string, maxRequests: number = 10, windowMs: nu
     bucket.lastRefill = now;
   }
 
-  // Check if we have tokens
+  // Consume token if available
   if (bucket.tokens > 0) {
     bucket.tokens--;
     return true;
@@ -52,7 +52,7 @@ const defaultRetryConfig: RetryConfig = {
   retryableStatuses: [408, 429, 500, 502, 503, 504]
 };
 
-// API Error class with detailed info
+// API Error class
 export class ApiError extends Error {
   constructor(
     public status: number,
@@ -64,15 +64,12 @@ export class ApiError extends Error {
   }
 }
 
-// Network error detection
-function isNetworkError(error: any): boolean {
-  return error instanceof TypeError && error.message === 'Failed to fetch';
-}
+// Utilities
+const isNetworkError = (error: any): boolean =>
+  error instanceof TypeError && error.message === 'Failed to fetch';
 
-// Sleep utility for retries
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-// Merge headers helper
 function mergeHeaders(init: RequestInit, isFormData: boolean): HeadersInit {
   const base = new Headers(init.headers as HeadersInit);
   if (!isFormData && !base.has('Content-Type')) {
@@ -81,14 +78,13 @@ function mergeHeaders(init: RequestInit, isFormData: boolean): HeadersInit {
   return base;
 }
 
-// Request deduplication key generator
 function getRequestKey(input: string, init: RequestInit): string {
   const method = init.method || 'GET';
   const body = init.body instanceof FormData ? 'FORMDATA' : init.body?.toString() || '';
   return `${method}:${input}:${body}`;
 }
 
-// Main API request with retry, deduplication, timeout
+// Main API request function
 export async function apiRequest<T>(
   input: string,
   init: RequestInit = {},
@@ -106,33 +102,20 @@ export async function apiRequest<T>(
     deduplicate = true,
     timeout = 30000,
     onProgress,
-    circuitBreaker,
+    circuitBreaker: cbName,
     rateLimit
   } = options;
 
-  // Rate limiting check
-  if (rateLimit) {
-    if (!checkRateLimit(input, rateLimit.maxRequests, rateLimit.windowMs)) {
-      throw new ApiError(429, 'Too Many Requests', 'Rate limit exceeded. Please slow down.');
-    }
+  // Rate limit check
+  if (rateLimit && !checkRateLimit(input, rateLimit.maxRequests, rateLimit.windowMs)) {
+    throw new ApiError(429, 'Too Many Requests', 'Rate limit exceeded. Please slow down.');
   }
 
   const retryConfig = { ...defaultRetryConfig, ...retry };
   const isFormData = init.body instanceof FormData;
 
-  // Wrap request in circuit breaker if specified
-  const executeRequest = async () => {
-
-  // Deduplication for GET requests
-  if (deduplicate && (init.method === 'GET' || !init.method)) {
-    const key = getRequestKey(input, init);
-    const pending = pendingRequests.get(key);
-    if (pending) {
-      return pending;
-    }
-  }
-
-  const executeRequest = async (attemptNumber = 0): Promise<T> => {
+  // Core request logic
+  const performRequest = async (attemptNumber = 0): Promise<T> => {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), timeout);
 
@@ -145,7 +128,7 @@ export async function apiRequest<T>(
 
       clearTimeout(timeoutId);
 
-      // Handle progress for large uploads
+      // Progress tracking
       if (onProgress && response.body) {
         const contentLength = response.headers.get('content-length');
         if (contentLength) {
@@ -176,53 +159,61 @@ export async function apiRequest<T>(
         const text = await response.text();
         const error = new ApiError(response.status, response.statusText, text);
 
-        // Retry on retryable status codes
+        // Retry logic
         if (
           retryConfig.retryableStatuses.includes(response.status) &&
           attemptNumber < retryConfig.maxRetries
         ) {
           const delay = retryConfig.retryDelay * Math.pow(2, attemptNumber);
           await sleep(delay);
-          return executeRequest(attemptNumber + 1);
+          return performRequest(attemptNumber + 1);
         }
 
         throw error;
       }
 
-      // Success response
-      if (response.status === 204) {
-        return undefined as T;
-      }
-      return (await response.json()) as T;
+      // Success
+      return response.status === 204 ? (undefined as T) : (await response.json() as T);
     } catch (error) {
       clearTimeout(timeoutId);
 
-      // Retry on network errors
+      // Network error retry
       if (isNetworkError(error) && attemptNumber < retryConfig.maxRetries) {
         const delay = retryConfig.retryDelay * Math.pow(2, attemptNumber);
         await sleep(delay);
-        return executeRequest(attemptNumber + 1);
+        return performRequest(attemptNumber + 1);
       }
 
       // Timeout error
       if ((error as Error).name === 'AbortError') {
-        throw new ApiError(408, 'Request Timeout', 'The request took too long to complete');
+        throw new ApiError(408, 'Request Timeout', 'The request took too long');
       }
 
       throw error;
     }
   };
 
-  const requestPromise = executeRequest();
+  // Wrap with circuit breaker if specified
+  const wrappedRequest = async (): Promise<T> => {
+    if (cbName && circuitBreakers[cbName]) {
+      return circuitBreakers[cbName].execute(() => performRequest());
+    }
+    return performRequest();
+  };
 
-  // Cache promise for deduplication
+  // Deduplication
   if (deduplicate && (init.method === 'GET' || !init.method)) {
     const key = getRequestKey(input, init);
-    pendingRequests.set(key, requestPromise);
-    requestPromise.finally(() => pendingRequests.delete(key));
+    const pending = pendingRequests.get(key);
+    if (pending) return pending;
+
+    const promise = wrappedRequest();
+    pendingRequests.set(key, promise);
+    promise.finally(() => pendingRequests.delete(key));
+    return promise;
   }
 
-  return requestPromise;
+  return wrappedRequest();
 }
 
 export { API_URL };
