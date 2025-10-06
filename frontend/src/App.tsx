@@ -5,6 +5,7 @@ import { PricingPage } from './pages/PricingPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
+import { QuickTranslatePage } from './pages/QuickTranslatePage';
 import { PrivateRoute } from './components/layout/PrivateRoute';
 import { LegalAGB } from './pages/legal/AGB';
 import { LegalImpressum } from './pages/legal/Impressum';
@@ -17,6 +18,7 @@ export default function App() {
     <Routes>
       <Route element={<AppLayout />}>
         <Route index element={<LandingPage />} />
+        <Route path="quick-translate" element={<QuickTranslatePage />} />
         <Route path="pricing" element={<PricingPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />

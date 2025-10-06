@@ -24,6 +24,20 @@ type Handler struct {
 	translationSvc      *services.TranslationService
 	paymentService      *services.PaymentService
 	stripeWebhookSecret string
+	deepl               translation.DeepLClient
+	redis               RedisClient
+	logger              Logger
+}
+
+// RedisClient interface for quick translate storage
+type RedisClient interface {
+	SetJSON(key string, value interface{}, ttl time.Duration) error
+	GetJSON(key string, dest interface{}) (bool, error)
+}
+
+// Logger interface
+type Logger interface {
+	Error(msg string, keysAndValues ...interface{})
 }
 
 // NewHandler constructs HTTP handler.
@@ -48,6 +62,12 @@ func (h *Handler) RegisterRoutes(r chi.Router) {
 				r.Use(appmiddleware.AuthMiddleware(h.cfg.JWTSecret))
 				r.Get("/me", h.handleMe)
 			})
+		})
+
+		// Quick Translate - No auth required
+		r.Route("/quick", func(r chi.Router) {
+			r.Post("/translate", h.QuickTranslate)
+			r.Get("/download/{id}", h.QuickDownload)
 		})
 
 		r.Get("/models", h.handleListModels)
