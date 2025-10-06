@@ -1,0 +1,44 @@
+# robots.txt for Kaminskyi Language Intelligence
+
+User-agent: *
+Allow: /
+Allow: /quick-translate
+Allow: /pricing
+Allow: /legal/*
+
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+
+# Sitemap
+Sitemap: https://turbotranslator.app/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Special rules for AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Block spam bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://turbotranslator.app/</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://turbotranslator.app/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://turbotranslator.app/de"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://turbotranslator.app/uk"/>
+  </url>
+
+  <!-- Quick Translate -->
+  <url>
+    <loc>https://turbotranslator.app/quick-translate</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://turbotranslator.app/en/quick-translate"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://turbotranslator.app/de/quick-translate"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://turbotranslator.app/uk/quick-translate"/>
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://turbotranslator.app/pricing</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://turbotranslator.app/en/pricing"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://turbotranslator.app/de/pricing"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://turbotranslator.app/uk/pricing"/>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://turbotranslator.app/legal/agb</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://turbotranslator.app/legal/datenschutz</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://turbotranslator.app/legal/impressum</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://turbotranslator.app/legal/cookies</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://turbotranslator.app/legal/widerruf</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

@@ -128,5 +128,64 @@
   "forms": {
     "required": "Required field",
     "passwordPolicy": "At least 8 characters with letters and numbers"
+  },
+  "quick": {
+    "title": "Quick Translate",
+    "subtitle": "Instant translation without registration. 5,000 characters, results available for 1 hour.",
+    "sourcePlaceholder": "Enter or paste text here...",
+    "sourceLabel": "Source text",
+    "targetLabel": "Translation",
+    "translateButton": "Translate",
+    "translating": "Translating...",
+    "charCount": "{{count}} / {{limit}} characters",
+    "charLimitExceeded": "Character limit exceeded",
+    "copyButton": "Copy to clipboard",
+    "downloadButton": "Download as TXT",
+    "clearButton": "Clear",
+    "copied": "Copied!",
+    "limitations": {
+      "title": "Limitations of Quick Translate",
+      "items": [
+        "Maximum 5,000 characters per translation",
+        "Results expire after 1 hour",
+        "Basic quality tier only",
+        "No format preservation",
+        "No translation history"
+      ]
+    },
+    "upgrade": {
+      "title": "Need more?",
+      "description": "Sign up for full access to premium models, unlimited storage, and advanced features.",
+      "cta": "Sign Up Free"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "AI Translation for Books & Documents | Kaminskyi Intelligence",
+      "description": "Professional AI-powered translation service. 13+ languages, 6 quality tiers, GDPR compliant. Translate books, documents, and texts with precision."
+    },
+    "pricing": {
+      "title": "Pricing - Translation Models | Kaminskyi Intelligence",
+      "description": "Flexible pricing from Basic to Ultimate. Pay per character with no hidden fees. Premium membership includes 20% discount."
+    },
+    "quickTranslate": {
+      "title": "Quick Translate - Free Instant Translation | Kaminskyi",
+      "description": "Translate up to 5,000 characters instantly without registration. Fast, accurate, and free. Results available for 1 hour."
+    }
+  },
+  "errors": {
+    "network": "Network error. Please check your connection.",
+    "timeout": "Request timed out. Please try again.",
+    "rateLimit": "Too many requests. Please slow down.",
+    "unknown": "An unexpected error occurred.",
+    "translationFailed": "Translation failed. Please try again.",
+    "fileTooBig": "File is too large. Maximum size: {{size}}",
+    "invalidFileType": "Invalid file type. Supported: PDF, DOCX, EPUB, TXT"
+  },
+  "success": {
+    "translationComplete": "Translation complete!",
+    "fileSaved": "File saved successfully",
+    "settingsUpdated": "Settings updated",
+    "accountCreated": "Account created successfully"
   }
 }
