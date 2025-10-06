@@ -3,15 +3,17 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { CookieConsent } from '../widgets/CookieConsent';
 import { OnboardingModal } from '../modals/OnboardingModal';
+import { ToastContainer } from '../ui/Toast';
 
 export const AppLayout = () => (
   <div className="min-h-screen bg-slate-900 text-white">
     <Header />
-    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-6 py-10">
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6 py-6 sm:py-10">
       <Outlet />
     </main>
     <Footer />
     <CookieConsent />
     <OnboardingModal />
+    <ToastContainer />
   </div>
 );

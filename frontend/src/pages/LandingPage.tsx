@@ -7,30 +7,30 @@ export const LandingPage = () => {
   const features = t('features.items', { returnObjects: true }) as string[];
 
   return (
-    <div className="flex flex-col gap-16 text-white">
+    <div className="flex flex-col gap-8 sm:gap-12 lg:gap-16 text-white">
       {/* Hero Section */}
-      <section className="glass-card px-6 py-16 text-center shadow-2xl animate-fade-in">
-        <h1 className="text-4xl font-bold leading-tight md:text-6xl bg-gradient-to-r from-white via-accent to-secondary bg-clip-text text-transparent">
+      <section className="glass-card px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 text-center shadow-2xl animate-fade-in">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-white via-accent to-secondary bg-clip-text text-transparent px-2">
           {t('hero.title')}
         </h1>
-        <p className="mt-6 text-lg text-white/80 md:text-xl max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed px-4">
           {t('hero.subtitle')}
         </p>
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
+        <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4">
           <Link
             to="/register"
-            className="group rounded-full bg-gradient-to-r from-accent to-sky-400 px-8 py-4 text-base font-semibold text-slate-900 hover:shadow-2xl hover:shadow-accent/50 transition-all duration-300 hover:scale-105"
+            className="group rounded-full bg-gradient-to-r from-accent to-sky-400 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold text-slate-900 hover:shadow-2xl hover:shadow-accent/50 transition-all duration-300 hover:scale-105 w-full sm:w-auto touch-manipulation active:scale-95"
           >
-            <span className="flex items-center gap-2">
+            <span className="flex items-center justify-center gap-2">
               {t('hero.ctaPrimary')}
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </span>
           </Link>
           <Link
             to="/pricing"
-            className="rounded-full border-2 border-white/30 px-8 py-4 text-base font-semibold text-white/90 hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-105"
+            className="rounded-full border-2 border-white/30 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white/90 hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-105 w-full sm:w-auto touch-manipulation active:scale-95"
           >
             {t('hero.ctaSecondary')}
           </Link>
@@ -38,8 +38,8 @@ export const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="grid gap-6 md:grid-cols-2">
-        <div className="glass-card p-8 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-300 hover:scale-[1.02]">
+      <section className="grid gap-4 sm:gap-6 md:grid-cols-2">
+        <div className="glass-card p-6 sm:p-8 hover:shadow-2xl hover:shadow-accent/10 transition-all duration-300 hover:scale-[1.02]">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center">
               <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">

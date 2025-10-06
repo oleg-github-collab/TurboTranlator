@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { apiRequest, ApiError } from '../api/client';
+import { useToast } from '../components/ui/Toast';
+import { useOnlineStatus } from '../hooks/useOnlineStatus';
 
 const LANGUAGES = [
   { code: 'auto', name: 'Auto-detect' },
@@ -26,6 +29,9 @@ interface QuickTranslateResponse {
 
 export const QuickTranslatePage = () => {
   const { t } = useTranslation();
+  const toast = useToast();
+  const isOnline = useOnlineStatus();
+
   const [text, setText] = useState('');
   const [sourceLang, setSourceLang] = useState('auto');
   const [targetLang, setTargetLang] = useState('EN');
@@ -38,31 +44,44 @@ export const QuickTranslatePage = () => {
   const isOverLimit = charCount > charLimit;
 
   const handleTranslate = async () => {
-    if (!text.trim() || isOverLimit) return;
+    if (!text.trim() || isOverLimit) {
+      toast.warning('Invalid input', 'Please enter text within the character limit');
+      return;
+    }
+
+    if (!isOnline) {
+      toast.error('No connection', 'Please check your internet connection');
+      return;
+    }
 
     setIsLoading(true);
     setError('');
 
     try {
-      const res = await fetch('/api/v1/quick/translate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text: text.trim(),
-          sourceLang,
-          targetLang,
-        }),
-      });
+      const data = await apiRequest<QuickTranslateResponse>(
+        '/api/v1/quick/translate',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            text: text.trim(),
+            sourceLang,
+            targetLang,
+          }),
+        },
+        {
+          timeout: 60000, // 60 seconds for translation
+          retry: { maxRetries: 2 }
+        }
+      );
 
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || 'Translation failed');
-      }
-
-      const data: QuickTranslateResponse = await res.json();
       setResult(data);
+      toast.success('Translation complete', 'Your text has been translated successfully');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Translation failed');
+      const errorMessage = err instanceof ApiError
+        ? err.data || err.statusText
+        : 'Translation failed. Please try again.';
+      setError(errorMessage);
+      toast.error('Translation failed', errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -79,9 +98,14 @@ export const QuickTranslatePage = () => {
     URL.revokeObjectURL(url);
   };
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     if (result) {
-      navigator.clipboard.writeText(result.translation);
+      try {
+        await navigator.clipboard.writeText(result.translation);
+        toast.success('Copied!', 'Translation copied to clipboard');
+      } catch {
+        toast.error('Copy failed', 'Unable to copy to clipboard');
+      }
     }
   };
 
