@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import { useTranslations } from '../hooks/useTranslations';
@@ -8,12 +8,12 @@ import type { TranslationRecord } from '../types/translation';
 
 const formatCurrency = (value: number) => `${value.toFixed(2)} €`;
 
-const StatsCard = ({ title, value }: { title: string; value: string }) => (
+const StatsCard = memo(({ title, value }: { title: string; value: string }) => (
   <div className="rounded-2xl border border-white/15 bg-white/5 p-6 text-white">
     <p className="text-sm text-white/70">{title}</p>
     <p className="mt-2 text-2xl font-semibold">{value}</p>
   </div>
-);
+));
 
 export const DashboardPage = () => {
   const { t } = useTranslation();
@@ -62,7 +62,13 @@ export const DashboardPage = () => {
           {t('dashboard.actions.new')}
         </div>
         <div className="max-h-96 overflow-y-auto">
-          {isLoading && <p className="p-6 text-white/60">Loading…</p>}
+          {isLoading && (
+            <div className="flex flex-col gap-2 p-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-16 animate-pulse rounded-xl bg-white/5"></div>
+              ))}
+            </div>
+          )}
           {!isLoading && translations && translations.length === 0 && (
             <p className="p-6 text-white/60">{t('dashboard.noTranslations')}</p>
           )}

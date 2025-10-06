@@ -11,6 +11,7 @@ export const Header = () => {
 
   const navLinks = [
     { to: '/', label: t('nav.home') },
+    { to: '/quick-translate', label: 'Quick Translate', badge: true },
     { to: '/pricing', label: t('nav.pricing') },
     { to: '/legal/agb', label: t('nav.legal') }
   ];
@@ -23,18 +24,23 @@ export const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden gap-6 md:flex">
+        <nav className="hidden gap-6 md:flex items-center">
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               className={({ isActive }) =>
-                `text-sm uppercase tracking-wide transition-all duration-200 ${
+                `text-sm uppercase tracking-wide transition-all duration-200 relative ${
                   isActive ? 'text-accent font-semibold' : 'text-white/80 hover:text-white'
                 }`
               }
             >
               {link.label}
+              {link.badge && (
+                <span className="absolute -top-2 -right-2 px-1.5 py-0.5 text-[9px] font-bold bg-gradient-to-r from-accent to-secondary rounded-full text-slate-900 animate-pulse">
+                  NEW
+                </span>
+              )}
             </NavLink>
           ))}
         </nav>
@@ -98,12 +104,17 @@ export const Header = () => {
                 to={link.to}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `text-sm uppercase tracking-wide transition-colors py-2 ${
+                  `text-sm uppercase tracking-wide transition-colors py-2 flex items-center gap-2 ${
                     isActive ? 'text-accent font-semibold' : 'text-white/80 hover:text-white'
                   }`
                 }
               >
                 {link.label}
+                {link.badge && (
+                  <span className="px-1.5 py-0.5 text-[9px] font-bold bg-gradient-to-r from-accent to-secondary rounded-full text-slate-900 animate-pulse">
+                    NEW
+                  </span>
+                )}
               </NavLink>
             ))}
             <div className="pt-3 border-t border-white/10 flex flex-col gap-3">
