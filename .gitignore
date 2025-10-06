@@ -1,0 +1,70 @@
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+*.log
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
+.fleet/
+.project
+.classpath
+.settings/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.test
+
+# Backend (Go)
+backend/bin/
+backend/coverage/
+backend/tmp/
+backend/.cache/
+backend/.air
+backend/vendor/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Frontend (Vite + React)
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/.eslintcache
+frontend/coverage/
+.cache/
+.parcel-cache/
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# OS
+Thumbs.db
+Desktop.ini
+._*
+
+# Generated
+legal/generated/
+tmp/
+.tmp/
+dist/
+coverage/
+
+# Claude
+.claude/

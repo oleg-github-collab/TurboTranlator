@@ -1,0 +1,132 @@
+{
+  "nav": {
+    "home": "Головна",
+    "dashboard": "Кабінет",
+    "pricing": "Тарифи",
+    "legal": "Правові документи",
+    "login": "Увійти",
+    "register": "Реєстрація",
+    "logout": "Вийти"
+  },
+  "hero": {
+    "title": "Kaminskyi Language Intelligence",
+    "subtitle": "AI-переклад книжок та великих текстів — швидко, точно та відповідно до GDPR.",
+    "ctaPrimary": "Почати безкоштовно",
+    "ctaSecondary": "Переглянути тарифи"
+  },
+  "features": {
+    "title": "Наші переваги",
+    "items": [
+      "Ексклюзивні моделі Kaminskyi на базі DeepL та OTranslator",
+      "Точний підрахунок символів без похибок",
+      "Збереження форматування для PDF, DOCX, EPUB та TXT",
+      "Зберігання даних у Німеччині відповідно до GDPR"
+    ]
+  },
+  "pricing": {
+    "title": "Тарифи",
+    "perCharacters": "за 1 860 символів",
+    "cta": "Створити переклад"
+  },
+  "models": {
+    "basic": "Kaminskyi Basic",
+    "standard": "Kaminskyi Standard",
+    "pro": "Kaminskyi Pro",
+    "elite": "Kaminskyi Elite",
+    "epic": "Kaminskyi Epic",
+    "ultimate": "Kaminskyi Ultimate"
+  },
+  "auth": {
+    "loginTitle": "Вхід",
+    "registerTitle": "Реєстрація",
+    "username": "Ім'я користувача",
+    "password": "Пароль",
+    "confirmPassword": "Підтвердити пароль",
+    "agb": "Я приймаю умови надання послуг",
+    "submitLogin": "Увійти",
+    "submitRegister": "Створити акаунт",
+    "switchToRegister": "Ще не маєте акаунту? Зареєструйтесь",
+    "switchToLogin": "Вже зареєстровані? Увійдіть"
+  },
+  "dashboard": {
+    "welcome": "Вітаємо, {{name}}",
+    "characters": "Символи",
+    "cost": "Вартість",
+    "status": "Статус",
+    "model": "Модель",
+    "created": "Створено",
+    "download": "Завантажити",
+    "noTranslations": "Ще немає перекладів. Почніть перший проєкт!",
+    "actions": {
+      "new": "Новий переклад",
+      "subscribe": "Підключити Premium"
+    },
+    "statsTranslations": "Переклади",
+    "statsCharacters": "Символи",
+    "statsCost": "Вартість"
+  },
+  "translationForm": {
+    "title": "Запустити переклад",
+    "sourceLang": "Мова оригіналу",
+    "targetLang": "Мова перекладу",
+    "autoDetect": "Автовизначення",
+    "model": "Модель Kaminskyi",
+    "options": "Параметри",
+    "glossary": "ID глосарію",
+    "formality": "Ступінь формальності",
+    "stripTags": "Ігнорувати теги під час підрахунку символів",
+    "file": "Завантажити файл",
+    "characters": "Символи",
+    "price": "Вартість",
+    "submit": "Перейти до оплати",
+    "premiumHint": "Учасники Premium отримують 20 % знижки на кожен переклад."
+  },
+  "onboarding": {
+    "title": "Як це працює",
+    "steps": [
+      "Створіть акаунт та увійдіть",
+      "Оберіть мови та модель Kaminskyi",
+      "Завантажте файл і перевірте вартість",
+      "Оплатіть через Stripe та отримайте результат"
+    ],
+    "next": "Далі",
+    "back": "Назад",
+    "finish": "Почати"
+  },
+  "cookie": {
+    "title": "Ми використовуємо cookies",
+    "description": "Ми застосовуємо необхідні cookies для роботи платформи та додаткові — для покращення сервісу. Ви можете змінити вибір у будь-який момент.",
+    "acceptAll": "Погодитися з усіма",
+    "acceptEssential": "Лише необхідні",
+    "settings": "Налаштування"
+  },
+  "footer": {
+    "imprint": "Вихідні дані",
+    "privacy": "Політика конфіденційності",
+    "terms": "Умови використання",
+    "cookies": "Політика cookies",
+    "withdrawal": "Право на відмову",
+    "rights": "© {{year}} Kaminskyi AI GmbH. Всі права захищено."
+  },
+  "subscription": {
+    "title": "Преміум-підписка",
+    "benefits": [
+      "Необмежене зберігання файлів",
+      "Знижка 20 % на кожен переклад",
+      "Пріоритетна черга та пакетні переклади",
+      "Власні глосарії та історія редагувань"
+    ],
+    "cta": "Підключити Premium за 12 USD/місяць"
+  },
+  "status": {
+    "pending": "Очікує оплату",
+    "queued": "У черзі",
+    "processing": "Виконується",
+    "completed": "Завершено",
+    "failed": "Помилка"
+  },
+  "forms": {
+    "required": "Обов'язкове поле",
+    "passwordPolicy": "Не менше 8 символів, букви та цифри"
+  }
+}

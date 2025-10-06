@@ -1,0 +1,132 @@
+{
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "pricing": "Pricing",
+    "legal": "Legal",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "Kaminskyi Language Intelligence",
+    "subtitle": "AI-powered translations for books and long-form texts — compliant, precise, and lightning fast.",
+    "ctaPrimary": "Get started",
+    "ctaSecondary": "View pricing"
+  },
+  "features": {
+    "title": "Why Kaminskyi?",
+    "items": [
+      "Exclusive Kaminskyi models rebranded from DeepL and OTranslator",
+      "Pixel-perfect character counting without rounding",
+      "Format preservation for PDF, DOCX, EPUB, and TXT",
+      "GDPR-ready storage located in Germany"
+    ]
+  },
+  "pricing": {
+    "title": "Pricing tiers",
+    "perCharacters": "per 1,860 characters",
+    "cta": "Start translation"
+  },
+  "models": {
+    "basic": "Kaminskyi Basic",
+    "standard": "Kaminskyi Standard",
+    "pro": "Kaminskyi Pro",
+    "elite": "Kaminskyi Elite",
+    "epic": "Kaminskyi Epic",
+    "ultimate": "Kaminskyi Ultimate"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "registerTitle": "Create account",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "agb": "I accept the Terms of Service",
+    "submitLogin": "Sign in",
+    "submitRegister": "Register",
+    "switchToRegister": "Need an account? Register",
+    "switchToLogin": "Already a member? Login"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}",
+    "characters": "Characters",
+    "cost": "Cost",
+    "status": "Status",
+    "model": "Model",
+    "created": "Created",
+    "download": "Download",
+    "noTranslations": "No translations yet. Start your first project!",
+    "actions": {
+      "new": "New translation",
+      "subscribe": "Upgrade to Premium"
+    },
+    "statsTranslations": "Translations",
+    "statsCharacters": "Characters",
+    "statsCost": "Cost"
+  },
+  "translationForm": {
+    "title": "Launch translation",
+    "sourceLang": "Source language",
+    "targetLang": "Target language",
+    "autoDetect": "Auto detect",
+    "model": "Kaminskyi model",
+    "options": "Options",
+    "glossary": "Glossary ID",
+    "formality": "Formality",
+    "stripTags": "Ignore formatting tags when counting characters",
+    "file": "Upload file",
+    "characters": "Characters",
+    "price": "Price",
+    "submit": "Proceed to payment",
+    "premiumHint": "Premium members enjoy 20% off every translation."
+  },
+  "onboarding": {
+    "title": "How it works",
+    "steps": [
+      "Create an account and sign in",
+      "Choose languages and a Kaminskyi model",
+      "Upload your file and review costs",
+      "Pay via Stripe and download the result"
+    ],
+    "next": "Next",
+    "back": "Back",
+    "finish": "Start now"
+  },
+  "cookie": {
+    "title": "We value your privacy",
+    "description": "We use essential cookies for the platform and optional cookies to enhance your experience. You can update your choice anytime.",
+    "acceptAll": "Accept all",
+    "acceptEssential": "Only essential",
+    "settings": "Settings"
+  },
+  "footer": {
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cookies": "Cookie Policy",
+    "withdrawal": "Right of Withdrawal",
+    "rights": "© {{year}} Kaminskyi AI GmbH. All rights reserved."
+  },
+  "subscription": {
+    "title": "Premium membership",
+    "benefits": [
+      "Unlimited storage with no deletion window",
+      "20% discount on every translation",
+      "Priority queueing and batch translations",
+      "Custom glossaries and revision history"
+    ],
+    "cta": "Unlock Premium for 12 USD/month"
+  },
+  "status": {
+    "pending": "Awaiting payment",
+    "queued": "Queued",
+    "processing": "Processing",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "forms": {
+    "required": "Required field",
+    "passwordPolicy": "At least 8 characters with letters and numbers"
+  }
+}

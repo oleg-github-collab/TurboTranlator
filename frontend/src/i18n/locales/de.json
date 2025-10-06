@@ -1,0 +1,132 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "dashboard": "Dashboard",
+    "pricing": "Preise",
+    "legal": "Rechtliches",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden"
+  },
+  "hero": {
+    "title": "Kaminskyi Language Intelligence",
+    "subtitle": "Premium-Übersetzungen für Bücher und lange Texte – KI-gestützt, datenschutzkonform und blitzschnell.",
+    "ctaPrimary": "Kostenlos starten",
+    "ctaSecondary": "Preise entdecken"
+  },
+  "features": {
+    "title": "Warum Kaminskyi?",
+    "items": [
+      "Rebranding von DeepL und OTranslator als exklusive Kaminskyi-Modelle",
+      "Präzise Zeichenzählung ohne Fehlertoleranz",
+      "Automatische Formatübernahme für PDF, DOCX, EPUB und TXT",
+      "DSGVO-konforme Speicherung in deutschen Rechenzentren"
+    ]
+  },
+  "pricing": {
+    "title": "Preismodelle",
+    "perCharacters": "pro 1.860 Zeichen",
+    "cta": "Auftrag starten"
+  },
+  "models": {
+    "basic": "Kaminskyi Basic",
+    "standard": "Kaminskyi Standard",
+    "pro": "Kaminskyi Pro",
+    "elite": "Kaminskyi Elite",
+    "epic": "Kaminskyi Epic",
+    "ultimate": "Kaminskyi Ultimate"
+  },
+  "auth": {
+    "loginTitle": "Anmeldung",
+    "registerTitle": "Registrierung",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "agb": "Ich akzeptiere die AGB",
+    "submitLogin": "Login",
+    "submitRegister": "Account erstellen",
+    "switchToRegister": "Noch kein Konto? Registrieren",
+    "switchToLogin": "Schon registriert? Login"
+  },
+  "dashboard": {
+    "welcome": "Willkommen, {{name}}",
+    "characters": "Zeichen",
+    "cost": "Kosten",
+    "status": "Status",
+    "model": "Modell",
+    "created": "Erstellt",
+    "download": "Download",
+    "noTranslations": "Noch keine Übersetzungen. Starte deine erste Datei!",
+    "actions": {
+      "new": "Neue Übersetzung",
+      "subscribe": "Premium aktivieren"
+    },
+    "statsTranslations": "Übersetzungen",
+    "statsCharacters": "Zeichen",
+    "statsCost": "Kosten"
+  },
+  "translationForm": {
+    "title": "Übersetzung starten",
+    "sourceLang": "Ausgangssprache",
+    "targetLang": "Zielsprache",
+    "autoDetect": "Auto-Erkennung",
+    "model": "Kaminskyi-Modell",
+    "options": "Optionen",
+    "glossary": "Glossar-ID",
+    "formality": "Formalität",
+    "stripTags": "Formatierungs-Tags beim Zeichenzählen ignorieren",
+    "file": "Datei hochladen",
+    "characters": "Zeichen",
+    "price": "Preis",
+    "submit": "Übersetzung bezahlen",
+    "premiumHint": "Premium-Mitglieder erhalten 20 % Rabatt auf jeden Auftrag."
+  },
+  "onboarding": {
+    "title": "So funktioniert es",
+    "steps": [
+      "Konto erstellen und anmelden",
+      "Sprachen & Kaminskyi-Modell auswählen",
+      "Datei hochladen und Kosten prüfen",
+      "Per Stripe bezahlen und Ergebnis herunterladen"
+    ],
+    "next": "Weiter",
+    "back": "Zurück",
+    "finish": "Los geht's"
+  },
+  "cookie": {
+    "title": "Wir verwenden Cookies",
+    "description": "Wir nutzen essenzielle Cookies für den Betrieb sowie optionale Cookies zur Verbesserung unseres Angebots. Sie können Ihre Auswahl jederzeit anpassen.",
+    "acceptAll": "Alle akzeptieren",
+    "acceptEssential": "Nur essenzielle",
+    "settings": "Einstellungen"
+  },
+  "footer": {
+    "imprint": "Impressum",
+    "privacy": "Datenschutzerklärung",
+    "terms": "AGB",
+    "cookies": "Cookie-Richtlinie",
+    "withdrawal": "Widerrufsrecht",
+    "rights": "© {{year}} Kaminskyi AI GmbH. Alle Rechte vorbehalten."
+  },
+  "subscription": {
+    "title": "Premium-Mitgliedschaft",
+    "benefits": [
+      "Unbegrenzte Dateispeicherung",
+      "20 % Rabatt auf alle Übersetzungen",
+      "Priorisierte Verarbeitung und Batch-Jobs",
+      "Eigene Glossare und Stilrichtlinien"
+    ],
+    "cta": "Premium für 12 USD/Monat freischalten"
+  },
+  "status": {
+    "pending": "Wartet auf Zahlung",
+    "queued": "In Warteschlange",
+    "processing": "In Bearbeitung",
+    "completed": "Abgeschlossen",
+    "failed": "Fehlgeschlagen"
+  },
+  "forms": {
+    "required": "Pflichtfeld",
+    "passwordPolicy": "Mindestens 8 Zeichen, Buchstaben und Zahlen"
+  }
+}

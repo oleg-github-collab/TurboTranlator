@@ -1,64 +1,44 @@
-version: "3.8"
-
+version: '3.9'
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: docker/frontend.Dockerfile
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: kli
+      POSTGRES_PASSWORD: kli
+      POSTGRES_DB: kli
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     ports:
-      - "80:80"  # Порт для публічного доступу до сайту
-    networks:
-      - app-network
-    restart: always
-    depends_on:
-      - backend
+      - "5432:5432"
 
-  backend:
+  redis:
+    image: redis:7-alpine
+    command: redis-server --save 60 1 --loglevel warning
+    ports:
+      - "6379:6379"
+
+  app:
     build:
       context: .
-      dockerfile: docker/backend.Dockerfile
+      dockerfile: docker/Dockerfile
+    environment:
+      APP_ENV: production
+      SERVER_PORT: "8080"
+      PUBLIC_URL: http://localhost:8080
+      DATABASE_URL: postgres://kli:kli@db:5432/kli?sslmode=disable
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: supersecretjwtkey
+      CLEANUP_INTERVAL: 1h
+      FILE_RETENTION: 168h
+      STRIPE_CURRENCY: eur
     env_file:
-      - .env
-    networks:
-      - app-network
-    restart: always
+      - backend/.env.example
     depends_on:
       - db
       - redis
-
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - .env
-    networks:
-      - app-network
-    restart: always
-
-  redis:
-    image: redis:alpine
-    networks:
-      - app-network
-    restart: always
-
-  celery:
-    build:
-      context: .
-      dockerfile: docker/backend.Dockerfile
-    command: celery -A tasks worker --loglevel=info
-    depends_on:
-      - backend
-      - redis
-    networks:
-      - app-network
-    env_file:
-      - .env
-    restart: always
-
-networks:
-  app-network:
-    driver: bridge
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
 
 volumes:
-  postgres_data:
+  pgdata:
